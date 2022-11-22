@@ -11,8 +11,8 @@ python Admin_application.py
 ```
 python User_appication.py
 ```
-2.After running the application, initialize the server for the applicaiton and website.
-change the directory of the terminal for the server to where the ***Main_server*** at.
+2.After running the application,you will initialize the server for the applicaiton and website.
+So change the directory of the terminal for the server to where the ***Main_server*** at.
 ```
 python Manage_server.py
 ```

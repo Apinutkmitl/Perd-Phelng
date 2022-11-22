@@ -11,3 +11,4 @@ and on different terminal(can be cmd or windows powershell or VSCode terminal)
 ```
 python User_appication.py
 ```
+>After running the application, initialize the server for the applicaiton and website

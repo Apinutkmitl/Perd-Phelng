@@ -3,7 +3,7 @@
 Perd-Phelng is a website/application for music queuing.
 ## How to use
 1.First run Admin application and User application.
-###In the folder directory, open cmd or windows powershell or VSCode terminal type in.
+### In the folder directory, open cmd or windows powershell or VSCode terminal type in.
 ```
 python Admin_application.py
 ```
@@ -12,7 +12,7 @@ python Admin_application.py
 python User_appication.py
 ```
 2.After running the application,you will initialize the server for the applicaiton and website.
-###So change the directory of the terminal for the server to where the ***Main_server*** at.
+### So change the directory of the terminal for the server to where the ***Main_server*** at.
 ```
 python Manage_server.py
 ```

@@ -7,7 +7,7 @@ First run Admin application and User application.
 ```
 python Admin_application.py
 ```
-and on different terminal(can be cmd or windows powershell or VSCode terminal).
+>on different terminal(can be cmd or windows powershell or VSCode terminal).
 ```
 python User_appication.py
 ```

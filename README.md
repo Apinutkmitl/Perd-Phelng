@@ -14,11 +14,14 @@ python User_appication.py
 ### 2. After running the application,you will initialize the server for the applicaiton and website.
 So change the directory of the terminal for the server to where the ***Main_server*** at.
 >to change directory of the file, simply type in
->cd Main_server
+```
+cd Main_server
+```
+start the main server
 ```
 python Manage_server.py
 ```
->on different terminal
+>on different terminal(can be cmd or windows powershell or VSCode terminal).
 ```
 python Play_server.py
 ```

@@ -1,0 +1,243 @@
+body {
+    position: relative;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Comfortaa', cursive;
+    background-color: #F2F5FD ;
+    line-height: 1.5;
+}
+
+h1{
+    font-size: 24px;
+    margin: 0;
+    padding-left: 30px;
+}
+
+h2{
+    display: flex;
+    justify-content: center;
+}
+
+p{
+    display: flex;
+    justify-content: center;
+}
+
+.header_container{
+    position: fixed;
+    display: flex;
+    top: -1rem;
+    margin: 0;
+    padding: 28px 0 14px 0;
+    width: 100%;
+    background-color: white;
+    border-radius: 20px;
+    z-index: 10;
+}
+
+.middle_box{
+    display: flex;
+    background-image: url("/static/img/Background.svg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: relative;
+    min-height: 100vh;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+
+@media (max-width:500px){
+    .add_song_container{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 315px;
+        height: 230px;
+        background-color: white;
+        border-radius: 20px;
+        box-shadow: 9px 9px #D9E4FF;
+        text-align: center;
+        font-size: 18px;
+    }
+    
+    .add_song_input{
+        display: flex;
+        margin: 25px auto;
+        padding-left: 16px;
+        height: 50px;
+        width: 265px;
+        border: 1px solid #8A8A8A;
+        border-radius: 20px;
+        font-family: 'Roboto', sans-serif;
+        font-weight: 400;
+        font-size: 15px;
+        color: black;
+    }
+}
+
+@media (min-width:501px){
+    .add_song_container{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 475px;
+        height: 300px;
+        background-color: white;
+        border-radius: 20px;
+        box-shadow: 9px 9px #D9E4FF;
+        text-align: center;
+        font-size: 18px;
+    }
+    
+    .add_song_input{
+        display: flex;
+        margin: 25px auto;
+        padding-left: 16px;
+        height: 51px;
+        width: 269px;
+        border: 1px solid #8A8A8A;
+        border-radius: 20px;
+        font-family: 'Roboto', sans-serif;
+        font-weight: 400;
+        font-size: 15px;
+        color: black;
+    }
+}
+
+.add_song_input::placeholder{
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 15px;
+}
+
+.add_song_input:focus{
+    outline: none;
+    border:1px solid #8A8A8A;
+    box-shadow: inset -2px -2px grey;
+}
+
+.send_button_container{
+    display: flex;
+    justify-content: center;
+    height: 51px;
+}
+
+.send_button{
+    font-family: 'Comfortaa', cursive;
+    font-weight: 600;
+    font-size: 18px;
+    background-color: #B0B2FF;
+    color: white;
+    padding: 0px 50px 0 32px;
+    border-style: none;
+    border-radius: 20px;
+}
+
+.send_button:hover{
+    cursor: pointer;
+}
+
+.send_icon{
+    position: absolute;
+    height: 27px;
+    margin: -5px 0 0 5px;
+}
+
+/* The Modal (background) */
+.modal {
+	display: none; /* Hidden by default */
+	position: fixed; /* Stay in place */
+	z-index: 1; /* Sit on top */
+	left: 0;
+	top: 0;
+	width: 100%; /* Full width */
+	height: 100%; /* Full height */
+	overflow: auto; /* Enable scroll if needed */
+	background-color: rgb(0,0,0); /* Fallback color */
+	background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+	-webkit-animation-name: fadeIn; /* Fade in the background */
+	-webkit-animation-duration: 0.4s;
+	animation-name: fadeIn;
+	animation-duration: 0.4s
+}
+
+/* Modal Content */
+.modal-content {
+	position: fixed;
+	bottom: 0;
+	background-color: #fefefe;
+	width: 50%;
+    left: 25%;
+	-webkit-animation-name: slideIn;
+	-webkit-animation-duration: 0.4s;
+	animation-name: slideIn;
+	animation-duration: 0.4s
+}
+
+/* The Close Button */
+.close {
+	color: #B0B2FF;
+	float: right;
+	font-size: 28px;
+	font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+	color: #000;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+.modal-header {
+	padding: 2px 16px;
+	background-color: #F2F5FD;
+	color: black;
+}
+
+/* .modal-body {
+    padding: 2px 16px;
+} */
+
+.modal-footer {
+    display: flex;
+    justify-content: center;
+	padding: 10px 16px;
+	background-color: #F2F5FD;
+	color: black;
+}
+
+.confirm{
+    font-family: 'Comfortaa', cursive;
+    font-weight: 600;
+    font-size: 18px;
+    background-color: #B0B2FF;
+    color: white;
+    padding: 10px 10px;
+    border-style: none;
+    border-radius: 20px;
+}
+
+/* Add Animation */
+@-webkit-keyframes slideIn {
+	from {bottom: -300px; opacity: 0} 
+	to {bottom: 0; opacity: 1}
+}
+
+@keyframes slideIn {
+	from {bottom: -300px; opacity: 0}
+	to {bottom: 0; opacity: 1}
+}
+
+@-webkit-keyframes fadeIn {
+	from {opacity: 0} 
+	to {opacity: 1}
+}
+
+@keyframes fadeIn {
+	from {opacity: 0} 
+	to {opacity: 1}
+}

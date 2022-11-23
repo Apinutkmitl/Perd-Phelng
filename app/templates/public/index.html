@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Add your Song here</title>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- Fonts -->
+	<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+	<!-- End Fonts -->
+	<!-- CSS style -->
+	<link rel="stylesheet" href="{{ url_for('static', filename='styles/main.css') }}">
+	<!-- <link rel="stylesheet" href="/MusicQueue/static/styles/main.css"> -->
+	<!-- End CSS style -->
+</head>
+
+<body>
+	<header class="header_container">
+		<h1>Poet Phleng</h1>
+	</header>
+	
+	<section class="middle_box">
+		<form action=""  method="post" >
+			<div class="add_song_container">
+				<label>Add song
+					<!-- class="add_song_label" -->
+					<input class="add_song_input" id="song"
+					name="song" type="text" required 
+					placeholder="Song name" autocomplete="off" />
+					<small></small>
+					<div class="send_button_container">
+						<button class="send_button" id="send-button" type="submit" >
+							Send
+							<img class="send_icon" src="{{ url_for('static', filename='img/send.svg') }}"alt="send-icon">
+						</button>
+					</div>
+				</label>
+			</div>
+		</form>
+	</section>
+	
+	<div class="modal" id="myModal">
+		<!-- Modal content -->
+		<div class="modal-content">
+			<div class="modal-header">
+				<span class="close" id="close">&times;</span>
+				<h2></h2>
+			</div>
+			<div class="modal-body">
+				<p> </p>
+			</div>
+			<div class="modal-footer">
+				<button class="confirm">confirm</button>
+			</div>
+		</div>
+	</div>
+
+	<script src="{{ url_for('static', filename='script/script.js') }}"></script>
+</body>
+</html>

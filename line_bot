@@ -1,0 +1,175 @@
+import json
+import os
+from flask import Flask
+from flask import request
+from flask import make_response
+from datetime import datetime
+
+test = [(1, '23423', 2, '12:20:36', 'normal'), (2, '42413', 0, '12:25:36', 'normal'),
+        (3, '42413', 1, '12:25:36', 'normal')]
+# Flask
+app = Flask(__name__)
+
+
+@app.route('/', methods=['POST'])
+def MainFunction():
+    # รับ intent จาก Dailogflow
+    question_from_dailogflow_raw = request.get_json(silent=True, force=True)
+    # print(question_from_dailogflow_raw)
+
+    global lineID
+    lineID = question_from_dailogflow_raw["originalDetectIntentRequest"]["payload"]["data"]["source"]["userId"]
+    print('lineID:', lineID)
+
+    # เรียกใช้ฟังก์ชัน generate_answer เพื่อแยกส่วนของคำถาม
+    answer_from_bot = generating_answer(question_from_dailogflow_raw)
+
+    # ตอบกลับไปที่ Dailogflow
+    r = make_response(answer_from_bot)
+    r.headers['Content-Type'] = 'application/json'  # การตั้งค่าประเภทของข้อมูลที่จะตอบกลับไป
+    return r
+
+
+def generating_answer(question_from_dailogflow_dict):
+    # Print intent ที่รับมาจาก Dailogflow
+    print(json.dumps(question_from_dailogflow_dict, indent=4, ensure_ascii=False))
+    # เก็บต่า ชื่อของ intent ที่รับมาจาก Dailogflow
+    intent_group_question_str = question_from_dailogflow_dict["queryResult"]["intent"]["displayName"]
+
+    print('intent ', intent_group_question_str)
+
+    if intent_group_question_str == "Available":
+        a1 = ''
+        a2 = ''
+        a3 = ''
+
+        if test[0][2] == 0 and test[0][0] == 1:
+            a1 = 'Machine 1: Available'
+        if test[0][2] == 1 and test[0][0] == 1:
+            a1 = 'Machine 1: Standby'
+        if test[0][2] == 2 and test[0][0] == 1:
+            a1 = 'Machine 1: State 2'
+        if test[0][2] == 2 and test[0][0] == 1:
+            a1 = 'Machine 1: State 3'
+
+        if test[1][2] == 0 and test[1][0] == 2:
+            a2 = 'Machine 2: Available'
+        if test[1][2] == 1 and test[1][0] == 2:
+            a2 = 'Machine 2: Standby'
+        if test[1][2] == 2 and test[1][0] == 2:
+            a2 = 'Machine 2: State 2'
+        if test[1][2] == 3 and test[1][0] == 2:
+            a2 = 'Machine 2: State 3'
+
+        if test[2][2] == 0 and test[2][0] == 3:
+            a3 = 'Machine 3: Available'
+        if test[2][2] == 1 and test[2][0] == 3:
+            a3 = 'Machine 3: Standby'
+        if test[2][2] == 2 and test[2][0] == 3:
+            a3 = 'Machine 3: State 2'
+
+        answer_str = a1 + '\n' + a2 + '\n' + a3
+
+    if intent_group_question_str == 'UserInfo':
+        answer_str = Regis(question_from_dailogflow_dict)
+
+    if intent_group_question_str == 'time_left':
+        answer_str = Timee()
+
+    # สร้างการแสดงของ dict
+    answer_from_bot = {"fulfillmentText": answer_str}
+    # แปลงจาก dict ให้เป็น JSON
+    answer_from_bot = json.dumps(answer_from_bot, indent=4)
+    return answer_from_bot
+
+
+def Regis(respond_dict):
+    print('hi')
+    # with open("page_info.json", "w") as json_file:  # write json file
+    #     json.dump(pt_dict, json_file, indent=4)
+    with open("test.json", "r") as json_file:
+        data = json.load(json_file)
+    print(data)
+    user_num = respond_dict["queryResult"]["outputContexts"][0]["parameters"]["regis_number.original"]
+    data["password"] = user_num[1:7]
+    data["LineID"] = lineID
+
+    if int(user_num[0]) != test[0][0] or user_num[1:7] != test[0][1]:
+        return 'numbers dont match'
+
+    if user_num[0] == '1':
+        data["ID"] = user_num[0]
+
+    if user_num[0] == '2':
+        data["ID"] = user_num[0]
+
+    if user_num[0] == '3':
+        data["ID"] = user_num[0]
+    # data["LineID"]= lineID
+
+    with open("test.json", "w") as jsonFile:
+        json.dump(data, jsonFile)
+
+    with open('test.json', 'r') as json_file:
+        an = json.load(json_file)
+    print(an)
+
+    ans = 'Registered'
+    answer_function = ans
+
+    return answer_function
+
+
+def Timee():
+    time_now = datetime.now()
+    current_time = time_now.strftime("%H:%M:%S")
+    time_stamp = test[0][3]
+
+    print("The current date and time is", current_time)
+    # iterate through time stamp
+    hour = time_stamp[0:2]
+    minute = time_stamp[3:5]
+    sec = time_stamp[6:8]
+
+    # current second
+    current_second = current_time[6:8]
+    print('current second', current_second)
+
+    mode = test[0][4]
+
+    # Mode(second)
+    if mode == 'quickwash':
+        work_time = 20
+    if mode == 'delicate':
+        work_time = 20
+    if mode == 'powerwash':
+        work_time = 30
+
+    print('work time', work_time)
+    print('stamp second', sec)
+
+    finish_second = int(sec) + work_time
+    print('finish second', finish_second)
+
+    carry = int(finish_second) // 60
+    print('carry', carry)
+    print('stamp minute', minute)
+    finish_minute = (int(minute) + carry) % 60
+    print('finish minute', finish_minute)
+    carry1 = int(finish_minute) // 60
+
+    finish_time = str(int(hour) + carry1) + ':' + str(finish_minute) + ':' + str(finish_second % 60)
+    global time_remain
+    time_remain = int(finish_second) - int(current_second)
+    print(finish_time)
+
+    value = str(time_remain) + ' second left' + '----->' + finish_time
+
+    return value
+
+
+# Flask
+if __name__ == '__main__':
+    port = int(os.getenv('PORT', 5000))
+    print("Starting app on port %d" % port)
+    app.run(debug=False, port=port, host='0.0.0.0', threaded=True)

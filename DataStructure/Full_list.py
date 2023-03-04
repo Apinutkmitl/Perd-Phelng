@@ -92,7 +92,6 @@ class fulllist:
         self.tail = sub
 
     #main function for adding music. parameters be usertype, user id (integer), and music name.
-    #usertype and music are strings for now, can change later
     def addmusic(self,id,url):
         newnode= Sub_list.Node(id,url)
         if self.head is None:
@@ -143,7 +142,6 @@ class fulllist:
         return
 
     #removes a certain music from all nodes if it contains
-    #music is a string for now
     def remove_music(self,url):
       if self.head == None:
         return 

@@ -1,3 +1,4 @@
+#base node cladss containing relavent data for each song
 class Node:
     def __init__(self, id,url):
         self.id = id
